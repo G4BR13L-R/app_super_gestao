@@ -16,9 +16,27 @@
  @endphp
 
 @isset($fornecedores)
-    Fornecedores: {{ $fornecedores[1] ['nome'] }}
-    <br>
-    Status: {{ $fornecedores[1] ['status'] }}
-    <br>
-    CNPJ: {{ $fornecedores[1] ['cnpj'] ?? 'Dado não foi preenchido'}}
+
+    @forelse($fornecedores as $fornecedor)
+        Iteração Atual: {{ $loop->iteration }}
+        <br>
+        Fornecedores: {{ $fornecedor ['nome'] }}
+        <br>
+        Status: {{ $fornecedor ['status'] }}
+        <br>
+        CNPJ: {{ $fornecedor ['cnpj'] ?? ''}}
+        <br>
+        Telefone: ({{ $fornecedor ['ddd'] ?? ''}}) {{ $fornecedor ['ddd'] ?? ''}}
+        <br>
+        @if($loop->first)
+            Primeira iteração do Loop
+        @endif
+
+        @if($loop->last)
+            Ultima iteração do Loop
+        @endif
+        <hr>
+    @empty
+        Não existem Fornecedores Cadastrados
+    @endforelse
 @endisset
